@@ -12,9 +12,9 @@ class RegionController extends Controller
 {
     public function index()
     {
-        $gm_employees = Employee::where('position_id', 2)->get();
-        $accountant_employees = Employee::where('position_id', 3)->get();
-        $coo_employees = Employee::where('position_id', 4)->get();
+        $gm_employees = Employee::where('activity_state', 1)->where('position_id', 2)->get();
+        $accountant_employees = Employee::where('activity_state', 1)->where('position_id', 3)->get();
+        $coo_employees = Employee::where('activity_state', 1)->where('position_id', 4)->get();
         $regions = Region::all();
 
         return view('pages.management.region.index', [
@@ -52,12 +52,14 @@ class RegionController extends Controller
         return redirect('/manajemen/wilayah')->with($status, $message);
     }
 
-    public function update(Request $request, Region $region)
+    public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
             'name' => 'required|max:255',
         ]);
         try {
+            $region = Region::where('id', $id)->first();
+
             Region::where('id', $region->id)->update($validatedData);
             $status = 'success';
             $message = 'Berhasil Mengubah Data';
@@ -110,10 +112,11 @@ class RegionController extends Controller
         return redirect('/manajemen/wilayah')->with($status, $message);
     }
 
-    public function destroy(Region $region)
+    public function destroy($id)
     {
+        $region = Region::where('id', $id)->first();
         $region->delete();
-
+        
         Log::create([
             'model' => 'regions',
             'data_id' => $region->id,
@@ -121,6 +124,7 @@ class RegionController extends Controller
             'message' => 'Administrasi Wilayah ' . $region->name . ' Berhasil Dihapu!',
             'user_id' => auth()->user()->id,
         ]);
+
         return redirect('/manajemen/wilayah')->with('success', 'Berhasil Menghapus Data');
     }
 }

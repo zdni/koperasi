@@ -25,7 +25,7 @@ class CreateEmployeesTable extends Migration
             $table->string('last_education');
             $table->boolean('activity_state');
             
-            $table->bigInteger('position_id')->unsigned();
+            $table->bigInteger('position_id')->nullable()->unsigned();
             $table->bigInteger('unit_id')->nullable()->unsigned();
             $table->bigInteger('user_id')->nullable()->unsigned();
             

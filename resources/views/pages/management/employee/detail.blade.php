@@ -98,7 +98,7 @@
                         Jabatan
                     </label>
                     <div class="col-lg-4 col-md-9 col-sm-8">
-                        <input type="text" class="form-control" disabled value="{{ $employee->position->name }}">
+                        <input type="text" class="form-control" disabled value="{{ $employee->position->name ?? '' }}">
                     </div>
                 </div>
                 <div class="form-group row">
@@ -229,7 +229,7 @@
                     <tbody>
                         <?php $total = 0; ?>
                         @foreach($lines as $line)
-                            @if($line->stated == 'post')
+                            @if($line->state == 'post')
                             <?php $total += $line->amount; ?>
                             <tr>
                                 <td>{{ $months[$line->month_] }} {{ $line->year_ }}</td>

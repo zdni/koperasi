@@ -15,4 +15,13 @@ class Position extends Model
     public function employees() {
         return $this->hasMany(Employee::class);
     }
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function($position) {
+            Employee::where('position_id', $position->id)->update(['position_id' => null]);
+        });
+    }
 }

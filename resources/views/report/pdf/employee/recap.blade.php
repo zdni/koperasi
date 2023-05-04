@@ -26,7 +26,7 @@
                     <td width="5%">{{ $loop->index+1 }}</td>
                     <td>{{ $employee->name }}</td>
                     <td>{{ $employee->unit->name ?? '-' }}</td>
-                    <td>@currency($employee->account_lines()->where('stated', 'post')->sum('amount'))</td>
+                    <td>@currency($employee->account_lines()->where('state', 'post')->sum('amount'))</td>
                 </tr>
                 @endforeach
             </tbody>

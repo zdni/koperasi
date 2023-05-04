@@ -18,4 +18,14 @@ class Region extends Model
     public function units() {
         return $this->hasMany(Unit::class);
     }
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function($region) {
+            Unit::where('region_id', $region->id)->update(['region_id' => null]);
+            $region->region_leaderships()->delete();
+        });
+    } 
 }

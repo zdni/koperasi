@@ -30,6 +30,7 @@ Route::middleware([Authenticate::class])->group(function() {
     Route::get('/karyawan/buat', [EmployeeController::class, 'create']);
     Route::post('/karyawan', [EmployeeController::class, 'store']);
     Route::put('/karyawan/ubah-status/{employee}', [EmployeeController::class, 'change_activity_state']);
+    Route::put('/karyawan/ambil-dana-jht/{employee}', [EmployeeController::class, 'take_account']);
     Route::get('/karyawan/ubah/{employee}', [EmployeeController::class, 'edit']);
     Route::get('/karyawan/kontrak/{employee}', [EmployeeController::class, 'redirect_to_employee_contract_detail']);
     Route::get('/karyawan/{employee}', [EmployeeController::class, 'show']);

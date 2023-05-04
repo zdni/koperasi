@@ -22,7 +22,7 @@ class AccountLineController extends Controller
     {
         if( count(request()->query) ) {
             $query = AccountLine::join('employees', 'employees.id', '=', 'account_lines.employee_id')
-                                ->where('stated', 'draft');
+                                ->where('state', 'draft');
             if( request()->account_id ) $query->where('account_id', request()->account_id);
 
             $lines = $query->get(['employees.name', 'account_lines.*']);
@@ -40,11 +40,10 @@ class AccountLineController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'amount' => 'required',
-            'month' => 'required',
-            'year' => 'required',
-            'stated' => 'required',
+            'state' => 'required',
             'account_id' => 'required',
             'employee_id' => 'required',
+            'user_id' => 'required',
         ]);
         
         if($validator->fails()) {
@@ -57,9 +56,7 @@ class AccountLineController extends Controller
 
         $line = AccountLine::create([
             'amount' => $request->amount,
-            'month' => $request->month,
-            'year' => $request->year,
-            'stated' => 'draft',
+            'state' => 'draft',
             'account_id' => $request->account_id,
             'employee_id' => $request->employee_id,
         ]);
@@ -69,7 +66,7 @@ class AccountLineController extends Controller
             'data_id' => $line->id,
             'datetime' => date('Y-m-d H:i:s'),
             'message' => 'Data Dana JHT Berhasil Dibuat!',
-            'user_id' => auth()->user()->id,
+            'user_id' => $request->user_id,
         ]);
 
         return response()->json([
@@ -98,6 +95,7 @@ class AccountLineController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'amount' => 'required',
+            'user_id' => 'required',
         ]);
         
         if($validator->fails()) {
@@ -116,7 +114,7 @@ class AccountLineController extends Controller
             'data_id' => $line->id,
             'datetime' => date('Y-m-d H:i:s'),
             'message' => 'Data Dana JHT Berhasil Diubah!',
-            'user_id' => auth()->user()->id,
+            'user_id' => $request->user_id,
         ]);
 
         return response()->json([
@@ -126,7 +124,7 @@ class AccountLineController extends Controller
         ]);
     }
 
-    public function destroy(AccountLine $line)
+    public function destroy(Request $request, AccountLine $line)
     {
         $line->delete();
 
@@ -135,7 +133,7 @@ class AccountLineController extends Controller
             'data_id' => $line->id,
             'datetime' => date('Y-m-d H:i:s'),
             'message' => 'Data Dana JHT Berhasil Dihapus!',
-            'user_id' => auth()->user()->id,
+            'user_id' => $request->user_id,
         ]);
 
         return response()->json([

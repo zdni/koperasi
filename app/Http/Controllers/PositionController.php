@@ -44,12 +44,14 @@ class PositionController extends Controller
         return redirect('/manajemen/jabatan')->with($status, $message);
     }
 
-    public function update(Request $request, Position $position)
+    public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
             'name' => 'required|max:255',
         ]);
         try {
+            $position = Position::where('id', $id)->first();
+
             Position::where('id', $position->id)->update($validatedData);
             $status = 'success';
             $message = 'Berhasil Mengubah Data';
@@ -68,8 +70,9 @@ class PositionController extends Controller
         return redirect('/manajemen/jabatan')->with($status, $message);
     }
     
-    public function destroy(Position $position)
+    public function destroy($id)
     {
+        $position = Position::where('id', $id)->first();
         $position->delete();
 
         Log::create([

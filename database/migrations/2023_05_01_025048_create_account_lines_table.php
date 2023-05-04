@@ -16,9 +16,7 @@ class CreateAccountLinesTable extends Migration
         Schema::create('account_lines', function (Blueprint $table) {
             $table->id();
             $table->integer('amount');
-            $table->integer('month');
-            $table->integer('year');
-            $table->string('stated');
+            $table->string('state');
             $table->timestamps();
             
             $table->bigInteger('account_id')->unsigned();

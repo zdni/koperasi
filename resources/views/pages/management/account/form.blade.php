@@ -18,6 +18,7 @@
     <input type="hidden" name="id" id="id" value="{{ $account->id }}">
     <input type="hidden" name="month" id="month" value="{{ $account->month }}">
     <input type="hidden" name="year" id="year" value="{{ $account->year }}">
+    <input type="hidden" name="user_id" id="user_id" value="{{ auth()->user()->id }}">
 
     <div class="col-12">
         <div class="row">
@@ -91,7 +92,7 @@
                                                 <div class="modal-body">
                                                     <div class="col-12">
                                                         <input id="id" name="id" type="hidden" class="form-control" value="{{ $account->id }}" required>
-                                                        <input id="stated" name="stated" type="hidden" class="form-control" value="cancel" required>
+                                                        <input id="state" name="state" type="hidden" class="form-control" value="cancel" required>
                                                         <div class="row">
                                                             <p>Yakin ingin membatalkan dokumen JHT yang telah dibuat?</p>
                                                         </div>
@@ -122,7 +123,7 @@
                                                 <div class="modal-body">
                                                     <div class="col-12">
                                                         <input id="id" name="id" type="hidden" class="form-control" value="{{ $account->id }}" required>
-                                                        <input id="stated" name="stated" type="hidden" class="form-control" value="post" required>
+                                                        <input id="state" name="state" type="hidden" class="form-control" value="post" required>
                                                         <div class="row">
                                                             <p>Yakin ingin memvalidasi dokumen JHT yang telah dibuat?</p>
                                                         </div>
@@ -139,7 +140,7 @@
                             </div>
                             <div class="card-tools">
                                 <button class="ml-2 btn btn-black btn-border  btn-round">
-                                    {{ $state[$account->stated] }}
+                                    {{ $state[$account->state] }}
                                 </button>
                             </div>
                         </div>

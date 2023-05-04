@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Employee;
+use App\Models\Log;
 use App\Models\Position;
 use App\Models\Region;
 use App\Models\Religion;
@@ -154,6 +155,14 @@ class DatabaseSeeder extends Seeder
             'position_id'               => 5,
             'user_id'                   => null,
             'religion_id'               => 1,
+        ]);
+
+        Log::create([
+            'model' => 'init',
+            'data_id' => 0,
+            'datetime' => date('Y-m-d H:i:s'),
+            'message' => 'Inisialisasi Data Berhasil Ditambahkan!',
+            'user_id' => 1,
         ]);
     }
 }

@@ -51,10 +51,10 @@ class ReportController extends Controller
             
             if($data == 'detail') {
                 foreach ($results as $employee) {
-                    $lines = AccountLine::where('account_lines.stated', 'post')
+                    $lines = AccountLine::where('account_lines.state', 'post')
                                 ->where('employee_id', $employee->id)
                                 ->join('accounts', 'accounts.id', '=', 'account_lines.account_id')
-                                ->get(['account_lines.amount', 'account_lines.stated', 'accounts.month', 'accounts.year']);
+                                ->get(['account_lines.amount', 'account_lines.state', 'accounts.month', 'accounts.year']);
                     $employee->lines = $lines;
                 }
             }
@@ -64,10 +64,10 @@ class ReportController extends Controller
             if($data == 'detail') {
                 foreach ($results as $unit) {
                     foreach ($unit->employees as $employee) {
-                        $lines = AccountLine::where('account_lines.stated', 'post')
+                        $lines = AccountLine::where('account_lines.state', 'post')
                                     ->where('employee_id', $employee->id)
                                     ->join('accounts', 'accounts.id', '=', 'account_lines.account_id')
-                                    ->get(['account_lines.amount', 'account_lines.stated', 'accounts.month', 'accounts.year']);
+                                    ->get(['account_lines.amount', 'account_lines.state', 'accounts.month', 'accounts.year']);
                         $employee->lines = $lines;
                     }
                 }
@@ -85,7 +85,7 @@ class ReportController extends Controller
             return $pdf->stream('Laporan Jaminan Hari Tua Karyawan.pdf');
         }
         if($type == 'excel') {
-            return Excel::download(new ReportExport, 'report.xlsx');
+            // return Excel::download(new ReportExport, 'report.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
         }
     }
 }

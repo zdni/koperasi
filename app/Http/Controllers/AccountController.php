@@ -58,7 +58,7 @@ class AccountController extends Controller
             
             $validatedData = [
                 'name' => $request->name,
-                'stated' => 'draft',
+                'state' => 'draft',
                 'month' => $month,
                 'year' => $year,
             ];
@@ -90,7 +90,7 @@ class AccountController extends Controller
             'description' => 'Input Dana JHT Karyawan KSU Abdi Karya',
             'account' => $account,
             'month' => $this->months[$account->month],
-            'state' => $this->state[$account->stated],
+            'state' => $this->state[$account->state],
         ]);
     }
 
@@ -111,11 +111,19 @@ class AccountController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|max:255',
-            'month' => 'required',
-            'year' => 'required',
+            'period_' => 'required',
         ]);
 
         try {
+            $period = $request->period_;
+            $month = explode('-', $period)[0];
+            $year = explode('-', $period)[1];
+
+            $validatedData = [
+                'name' => $request->name,
+                'month' => $month,
+                'year' => $year,
+            ];
             Account::where('id', $account->id)->update($validatedData);
             $status = 'success';
             $message = 'Berhasil Mengubah Data';
@@ -137,14 +145,14 @@ class AccountController extends Controller
     public function cancel(Request $request, Account $account)
     {
         $validatedData = $request->validate([
-            'stated' => 'required',
+            'state' => 'required',
             'id' => 'required',
         ]);
 
         try {
             $id = $request->id;
             Account::where('id', $id)->update($validatedData);
-            AccountLine::where('account_id', $id)->update(['stated' => 'cancel']);
+            AccountLine::where('account_id', $id)->update(['state' => 'cancel']);
 
             $status = 'success';
             $message = 'Dana JHT Berhasil Dibatalkan';
@@ -166,14 +174,14 @@ class AccountController extends Controller
     public function _validate(Request $request, Account $account)
     {
         $validatedData = $request->validate([
-            'stated' => 'required',
+            'state' => 'required',
             'id' => 'required',
         ]);
 
         try {
             $id = $request->id;
             Account::where('id', $id)->update($validatedData);
-            AccountLine::where('account_id', $id)->update(['stated' => 'post']);
+            AccountLine::where('account_id', $id)->update(['state' => 'post']);
 
             $status = 'success';
             $message = 'Dana JHT Berhasil Divalidasi';

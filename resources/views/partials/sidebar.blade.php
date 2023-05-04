@@ -62,11 +62,11 @@
                                     <span class="sub-item">Pengguna</span>
                                 </a>
                             </li>
-                            <!-- <li class="{{ Request::is('karyawan-nonaktif') ? 'active' : '' }}">
+                            <li class="{{ Request::is('karyawan-nonaktif') ? 'active' : '' }}">
                                 <a href="/karyawan-nonaktif">
                                     <span class="sub-item">Karyawan non Aktif</span>
                                 </a>
-                            </li> -->
+                            </li>
                         </ul>
                     </div>
                 </li>

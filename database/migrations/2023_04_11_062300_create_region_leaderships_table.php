@@ -15,9 +15,9 @@ class CreateRegionLeadershipsTable extends Migration
     {
         Schema::create('region_leaderships', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('accountant_employee_id')->unsigned();
-            $table->bigInteger('coordinator_employee_id')->unsigned();
-            $table->bigInteger('gm_employee_id')->unsigned();
+            $table->bigInteger('accountant_employee_id')->nullable()->unsigned();
+            $table->bigInteger('coordinator_employee_id')->nullable()->unsigned();
+            $table->bigInteger('gm_employee_id')->nullable()->unsigned();
             $table->bigInteger('region_id')->unsigned();
 
             $table->foreign('accountant_employee_id')->references('id')->on('employees');

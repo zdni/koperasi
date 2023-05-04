@@ -56,14 +56,15 @@ class UserController extends Controller
         return redirect('/manajemen/pengguna')->with($status, $message);
     }
 
-    public function update(Request $request, User $user)
+    public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
             'name' => 'required|max:255',
             'role_id' => 'required',
-            'stated' => 'required',
+            'state' => 'required',
         ]);
         try {
+            $user = User::where('id', $id)->first();
             User::where('id', $user->id)->update($validatedData);
             $status = 'success';
             $message = 'Berhasil Mengubah Data';
@@ -83,8 +84,9 @@ class UserController extends Controller
         return redirect('/manajemen/pengguna')->with($status, $message);
     }
 
-    public function destroy(User $user)
+    public function destroy($id)
     {
+        $user = User::where('id', $id)->first();
         $user->delete();
 
         Log::create([

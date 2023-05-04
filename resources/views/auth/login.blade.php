@@ -48,7 +48,7 @@
                             <i class="icon-eye"></i>
                         </div>
                     </div>
-					<input type="hidden" name="stated" id="stated" value="1">
+					<input type="hidden" name="state" id="state" value="1">
                     <div class="form-action mb-3">
                         <button type="submit" class="btn btn-primary btn-rounded btn-login">Login</button>
                     </div>

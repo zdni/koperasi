@@ -98,7 +98,7 @@
                                 <td>
                                     {{ $user->name }}
                                     <br>
-                                    <span class="badge badge-count">{{ $state[$user->stated] }}</span>
+                                    <span class="badge badge-count">{{ $state[$user->state] }}</span>
                                 </td>
                                 <td>
                                     {{ $user->username }}
@@ -151,9 +151,9 @@
                                                             <div class="col-sm-12">
                                                                 <div class="form-group form-group-default">
                                                                     <label>Role</label>
-                                                                    <select name="stated" id="stated" class="form-control">
-                                                                        <option {{ ($user->stated == 0) ? 'selected' : '' }} value="0">Nonaktif</option>
-                                                                        <option {{ ($user->stated == 1) ? 'selected' : '' }} value="1">Aktif</option>
+                                                                    <select name="state" id="state" class="form-control">
+                                                                        <option {{ ($user->state == 0) ? 'selected' : '' }} value="0">Nonaktif</option>
+                                                                        <option {{ ($user->state == 1) ? 'selected' : '' }} value="1">Aktif</option>
                                                                     </select>
                                                                 </div>
                                                             </div>

@@ -18,7 +18,7 @@ class CreateAccountsTable extends Migration
             $table->string('name');
             $table->integer('month');
             $table->integer('year');
-            $table->string('stated');
+            $table->string('state');
             $table->timestamps();
             
             $table->softDeletes();

@@ -6,6 +6,7 @@ use App\Models\AccountLine;
 use App\Models\Employee;
 use App\Models\Log;
 use App\Models\Position;
+use App\Models\RegionLeadership;
 use App\Models\Religion;
 use App\Models\Unit;
 use App\Models\User;
@@ -139,7 +140,7 @@ class EmployeeController extends Controller
     {
         $lines = AccountLine::join('accounts', 'accounts.id', '=', 'account_lines.account_id')
                             ->where('employee_id', $employee->id)
-                            ->where('account_lines.stated', 'post')
+                            ->where('account_lines.state', 'post')
                             ->orderBy('accounts.year', 'ASC')
                             ->orderBy('accounts.month', 'ASC')
                             ->get(['account_lines.*', 'accounts.month as month_', 'accounts.year as year_']);
@@ -229,6 +230,61 @@ class EmployeeController extends Controller
                 'data_id' => $employee->id,
                 'datetime' => date('Y-m-d H:i:s'),
                 'message' => 'Data Karyawan ' . $employee->name . ' Berhasil Dinonaktifkan!',
+                'user_id' => auth()->user()->id,
+            ]);
+            
+            if($request->activity_state == 0) {
+                if( $employee->position_id == 2 ) {
+                    RegionLeadership::where('gm_employee_id', $employee->id)->update(['gm_employee_id' => null]);
+                } else if( $employee->position_id == 3 ) {
+                    RegionLeadership::where('accountant_employee_id', $employee->id)->update(['accountant_employee_id' => null]);
+                } else if( $employee->position_id == 4 ) {
+                    RegionLeadership::where('coordinator_employee_id', $employee->id)->update(['coordinator_employee_id' => null]);
+                }
+            }
+        } catch (\Exception $exception) {
+            $status = 'danger';
+            $message = 'Gagal Mengubah Data';
+        }
+
+        return redirect('karyawan')->with($status, $message);
+    }
+
+    public function take_account(Request $request, Employee $employee)
+    {
+        $validatedData = $request->validate([
+            'id' => 'required',
+        ]);
+        
+        try {
+            AccountLine::where('employee_id', $employee->id)->update(['state' => 'out']);
+            if($request->change_activity == 'on') {
+                Employee::where('id', $employee->id)->update(['activity_state' => 0]);
+
+                Log::create([
+                    'model' => 'employees',
+                    'data_id' => $employee->id,
+                    'datetime' => date('Y-m-d H:i:s'),
+                    'message' => 'Data Karyawan ' . $employee->name . ' Berhasil Dinonaktifkan!',
+                    'user_id' => auth()->user()->id,
+                ]);
+                
+                if( $employee->position_id == 2 ) {
+                    RegionLeadership::where('gm_employee_id', $employee->id)->update(['gm_employee_id' => null]);
+                } else if( $employee->position_id == 3 ) {
+                    RegionLeadership::where('accountant_employee_id', $employee->id)->update(['accountant_employee_id' => null]);
+                } else if( $employee->position_id == 4 ) {
+                    RegionLeadership::where('coordinator_employee_id', $employee->id)->update(['coordinator_employee_id' => null]);
+                }
+            }
+            $status = 'success';
+            $message = 'Berhasil Mengambil Dana JHT Karyawan';
+
+            Log::create([
+                'model' => 'employees',
+                'data_id' => $employee->id,
+                'datetime' => date('Y-m-d H:i:s'),
+                'message' => 'Dana JHT Karyawan ' . $employee->name . ' Berhasil Diambil!',
                 'user_id' => auth()->user()->id,
             ]);
         } catch (\Exception $exception) {

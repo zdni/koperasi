@@ -11,7 +11,7 @@ use App\Models\User;
 class DashboardController extends Controller
 {
     public function index() {
-        $activities = Log::whereIn('model', ['accounts', 'employees', 'regions', 'units', 'users'])->get();
+        $activities = Log::whereIn('model', ['init', 'accounts', 'employees', 'regions', 'units', 'users'])->get();
 
         $query_employees = Employee::where('activity_state', 1)
                         ->where('position_id', '!=', 1);

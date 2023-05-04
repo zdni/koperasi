@@ -40,7 +40,7 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="row">
-                                        <div class="col-sm-12">
+                                        <div class="col-12">
                                             <div class="form-group form-group-default">
                                                 <label>Nama</label>
                                                 <input id="name" name="name" type="text" class="form-control" placeholder="Masukkan Data Account" required>
@@ -90,15 +90,15 @@
                             @foreach($accounts as $account)
                             <tr>
                                 <td>{{ $account->name }}</td>
-                                <td>{{ $state[$account->stated] }}</td>
+                                <td>{{ $state[$account->state] }}</td>
                                 <td>
                                     <div class="form-button-action">
-                                        @if($account->stated == 'draft')
-                                        <!-- <button class="mr-1 btn  btn-primary" data-toggle="modal" data-target="#edit-{{ $account->id }}">
+                                        @if($account->state == 'draft')
+                                        <button class="mr-1 btn  btn-primary" data-toggle="modal" data-target="#edit-{{ $account->id }}">
                                             Edit
-                                        </button> -->
+                                        </button>
 
-                                        <!-- <div class="modal fade" id="edit-{{ $account->id }}" tabindex="-1" role="dialog" aria-hidden="true">
+                                        <div class="modal fade" id="edit-{{ $account->id }}" tabindex="-1" role="dialog" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
                                                     <form action="/dana-jht/{{ $account->id }}" method="post">
@@ -114,7 +114,7 @@
                                                         </div>
                                                         <div class="modal-body">
                                                             <div class="row">
-                                                                <div class="col-sm-12">
+                                                                <div class="col-12">
                                                                     <div class="form-group form-group-default">
                                                                         <label>Nama</label>
                                                                         <input id="name" name="name" type="text" class="form-control" placeholder="Masukkan Nama" value="{{ $account->name }}" required>
@@ -124,7 +124,7 @@
                                                                     <div class="form-group">
                                                                         <label>Input Date Picker</label>
                                                                         <div class="input-group">
-                                                                            <input type="text" class="form-control" id="period" name="period">
+                                                                            <input type="text" class="form-control" id="period_" name="period_" value="{{ $account->month }}-{{ $account->year }}">
                                                                             <div class="input-group-append">
                                                                                 <span class="input-group-text">
                                                                                     <i class="fa fa-calendar-check"></i>
@@ -142,7 +142,7 @@
                                                     </form>
                                                 </div>
                                             </div>
-                                        </div> -->
+                                        </div>
 
                                         <a href="/input-jht/{{ $account->id }}" class="mr-1 btn  btn-border btn-black">
                                             Lihat

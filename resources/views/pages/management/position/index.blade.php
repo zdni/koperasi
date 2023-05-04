@@ -84,9 +84,9 @@
                                         <button class="mr-1 btn  btn-primary" data-toggle="modal" data-target="#edit-data-jabatan-{{ $position->id }}">
                                             Edit
                                         </button>
-                                        <!-- <button class="mr-1 btn  btn-danger" data-toggle="modal" data-target="#hapus-data-jabatan-{{ $position->id }}">
+                                        <button class="mr-1 btn  btn-danger" data-toggle="modal" data-target="#hapus-data-jabatan-{{ $position->id }}">
                                             Hapus
-                                        </button> -->
+                                        </button>
 
                                         <div class="modal fade" id="edit-data-jabatan-{{ $position->id }}" tabindex="-1" role="dialog" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
@@ -121,7 +121,7 @@
                                             </div>
                                         </div>
                                         
-                                        <!-- <div class="modal fade" id="hapus-data-jabatan-{{ $position->id }}" tabindex="-1" role="dialog" aria-hidden="true">
+                                        <div class="modal fade" id="hapus-data-jabatan-{{ $position->id }}" tabindex="-1" role="dialog" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
                                                     <form action="/manajemen/jabatan/{{ $position->id }}" method="post">
@@ -145,7 +145,7 @@
                                                     </form>
                                                 </div>
                                             </div>
-                                        </div> -->
+                                        </div>
                                     </div>
                                 </td>
                             </tr>

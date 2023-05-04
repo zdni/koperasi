@@ -94,6 +94,9 @@
 		$('#period').datetimepicker({
 			format: "MM-YYYY",
 		});
+		$('#period_').datetimepicker({
+			format: "MM-YYYY",
+		});
 
 		$('#employee_id').select2({
 			theme: "bootstrap"
@@ -146,12 +149,14 @@
 							$('.update-line').on('click', function(event) {
 								const id = $(this).parent().siblings()[1].value
 								const amount = $(this).parent().siblings()[2].value
+								const user_id = $('#user_id').val()
 								
 								$.ajax({
 									url: `http://127.0.0.1:8001/api/lines/${id}`,
 									method: 'PUT',
 									data: {
-										amount
+										amount,
+										'user_id': user_id,
 									}
 								})
 								.done(function(result) {
@@ -179,15 +184,24 @@
 										delay: 0,
 									});
 								})
+								.fail(function(xhr, status, error) {
+									console.log(xhr)
+									console.log(status)
+									console.log(error)
+								});
 
 								getAllLines()
 							});
 							$('.destroy-line').on('click', function(event) {
 								const id = $(this).parent().siblings()[1].value
+								const user_id = $('#user_id').val()
 								
 								$.ajax({
 									url: `http://127.0.0.1:8001/api/lines/${id}`,
 									type: 'DELETE',
+									data: {
+										'user_id': user_id,
+									}
 								})
 								.done(function(result) {
 									const {status, message, line} = result
@@ -214,6 +228,11 @@
 										delay: 0,
 									});
 								})
+								.fail(function(xhr, status, error) {
+									console.log(xhr)
+									console.log(status)
+									console.log(error)
+								});
 								
 								getAllLines()
 							});
@@ -230,19 +249,17 @@
 
 			function create() {
 				const account_id = $('#id').val()
-				const month = $('#month').val()
-				const year = $('#year').val()
+				const user_id = $('#user_id').val()
 				
 				const amount = $('#form-create-account-line #amount')
 				const employee_id = $('#form-create-account-line #employee_id')
 
 				const form = {
 					'account_id': account_id,
-					'month': month,
-					'year': year,
 					'amount': amount.val(),
 					'employee_id': employee_id.val(),
-					'stated': 'draft',
+					'state': 'draft',
+					'user_id': user_id,
 				}
 
 				$.post(`http://127.0.0.1:8001/api/lines`, form, function(data, _status) {
@@ -283,6 +300,12 @@
 						employee_id.val('').change()
 					}
 				})
+				.done(function(msg){  })
+				.fail(function(xhr, status, error) {
+					console.log(xhr)
+					console.log(status)
+					console.log(error)
+				});
 				
 				getAllLines()
 			}

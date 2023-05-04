@@ -18,4 +18,13 @@ class Unit extends Model
     public function employees() {
         return $this->hasMany(Employee::class);
     }
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function($unit) {
+            Employee::where('unit_id', $unit->id)->update(['unit_id' => null]);
+        });
+    } 
 }
