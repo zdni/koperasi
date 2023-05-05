@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Exports\ReportExport;
 use App\Models\AccountLine;
 use App\Models\Employee;
 use App\Models\Unit;
 use Illuminate\Http\Request;
-use Maatwebsite\Excel\Facades\Excel;
 
 use PDF;
 
@@ -85,7 +83,7 @@ class ReportController extends Controller
             return $pdf->stream('Laporan Jaminan Hari Tua Karyawan.pdf');
         }
         if($type == 'excel') {
-            // return Excel::download(new ReportExport, 'report.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
+        
         }
     }
 }
