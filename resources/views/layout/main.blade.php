@@ -264,7 +264,7 @@
 					'user_id': user_id,
 				}
 
-				$.post(`http://127.0.0.1:8001/api/lines`, form, function(data, _status) {
+				$.post(`${api}/api/lines`, form, function(data, _status) {
 					if(_status === 'success') {
 						const {status, message, line} = data
 						
