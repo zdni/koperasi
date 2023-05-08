@@ -264,7 +264,7 @@
 					'user_id': user_id,
 				}
 
-				$.post(`${api}/api/lines`, form, function(data, _status) {
+				$.post(`${api}api/lines`, form, function(data, _status) {
 					if(_status === 'success') {
 						const {status, message, line} = data
 						
