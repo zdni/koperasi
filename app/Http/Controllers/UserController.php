@@ -69,14 +69,13 @@ class UserController extends Controller
             $status = 'success';
             $message = 'Berhasil Mengubah Data';
             
-            $a = Log::create([
+            Log::create([
                 'model' => 'users',
                 'data_id' => $user->id,
                 'datetime' => date('Y-m-d H:i:s'),
                 'message' => 'Pengguna ' . $user->name . ' Berhasil Diubah!',
                 'user_id' => auth()->user()->id,
             ]);
-            dd($a);
         } catch (\Exception $exception) {
             $status = 'danger';
             $message = 'Gagal Mengubah Data';
