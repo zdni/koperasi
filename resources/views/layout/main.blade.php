@@ -108,10 +108,12 @@
 
 	<script>
 		$(document).ready(function() {
+			const api = 'http://165.22.49.114/'
+			// const api = 'http://127.0.0.1:8001/'
 			function getAllLines() {
 				const id = $('#id').val()
 	
-				$.get(`http://127.0.0.1:8001/api/lines?account_id=${id}`, function(data, _status) {
+				$.get(`${api}api/lines?account_id=${id}`, function(data, _status) {
 					if(_status === 'success') {
 						const tbodyAccount = $('#tbody-account')
 						const {status, lines} = data
@@ -152,7 +154,7 @@
 								const user_id = $('#user_id').val()
 								
 								$.ajax({
-									url: `http://127.0.0.1:8001/api/lines/${id}`,
+									url: `${api}api/lines/${id}`,
 									method: 'PUT',
 									data: {
 										amount,
@@ -197,7 +199,7 @@
 								const user_id = $('#user_id').val()
 								
 								$.ajax({
-									url: `http://127.0.0.1:8001/api/lines/${id}`,
+									url: `${api}api/lines/${id}`,
 									type: 'DELETE',
 									data: {
 										'user_id': user_id,
