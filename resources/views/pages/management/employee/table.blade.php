@@ -41,7 +41,7 @@
                             @foreach($employees as $employee)
                             <tr>
                                 <td>{{ $employee->name }}</td>
-                                <td>{{ $employee->unit->name }}</td>
+                                <td>{{ $employee->unit->name ?? '-' }}</td>
                                 <td>{{ $employee->position->name }}</td>
                                 <td>
                                     <div class="form-button-action">
