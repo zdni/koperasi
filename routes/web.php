@@ -60,6 +60,6 @@ Route::middleware([Authenticate::class])->group(function() {
 
     Route::get('/laporan/karyawan-aktif', [ReportController::class, 'report']);
     Route::post('/laporan/karyawan-aktif', [ReportController::class, 'get_active_employee_fund_report']);
-    Route::post('/laporan/karyawan-nonaktif', [ReportController::class, 'get_inactive_employee_fund_report']);
+    Route::get('/laporan/karyawan-nonaktif', [ReportController::class, 'get_inactive_employee_fund_report']);
     
 });

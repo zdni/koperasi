@@ -54,6 +54,18 @@ class AccountLineController extends Controller
             ]);
         }
 
+        $checkData = AccountLine::where('account_id', $request->account_id)
+                                ->where('employee_id', $request->employee_id)
+                                ->count();
+        if($checkData) {
+            $message = ['message' => 'Dana JHT untuk Karyawan Terpilih telah diinput!'];
+            return response()->json([
+                'status' => 'error',
+                'message' => $message,
+                'line' => null
+            ]);
+        }
+
         $line = AccountLine::create([
             'amount' => $request->amount,
             'state' => 'draft',

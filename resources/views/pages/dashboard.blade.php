@@ -65,7 +65,7 @@
                         <div class="card-body">
                             <div class="col-12">
                                 <div class="row">
-                                    <div class="col-3">
+                                    <div class="col-12">
                                         <div class="form-group">
                                             <label for="">Data</label>
                                             <select name="model" id="model" class="form-control">
@@ -74,7 +74,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-9">
+                                    <div class="col-12">
                                         <div class="form-group" id="form-group-employee">
                                             <label for="">Karyawan</label>
                                             <div class="select2-input">

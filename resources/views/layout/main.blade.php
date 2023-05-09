@@ -4,7 +4,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<title>KSU Abdi Karya</title>
 	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
-	<link rel="icon" href="{{ asset('assets/img/icon.ico') }}" type="image/x-icon"/>
+	<link rel="icon" href="{{ asset('assets/img/logo.ico') }}" type="image/x-icon"/>
 
 	<script src="{{ asset('assets/js/plugin/webfont/webfont.min.js') }}"></script>
 	<script>
@@ -108,10 +108,12 @@
 
 	<script>
 		$(document).ready(function() {
-			const api = 'http://165.22.49.114/'
-			// const api = 'http://127.0.0.1:8001/'
+			const api = "{{ env('APP_URL') }}"
+			
 			function getAllLines() {
 				const id = $('#id').val()
+
+				if(id === undefined) return
 	
 				$.get(`${api}api/lines?account_id=${id}`, function(data, _status) {
 					if(_status === 'success') {

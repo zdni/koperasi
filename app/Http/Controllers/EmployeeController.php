@@ -67,8 +67,8 @@ class EmployeeController extends Controller
         $employees = Employee::where('activity_state', 0)->get();
 
         return view('pages.management.employee.table', [
-            'page' => 'Karyawan non Aktif',
-            'description' => 'Daftar Karyawan KSU Abdi Karya non Aktif',
+            'page' => 'Karyawan Non Aktif',
+            'description' => 'Daftar Karyawan KSU Abdi Karya Non Aktif',
             'employees' => $employees,
             'state' => ['Nonaktif', 'Aktif'],
         ]);

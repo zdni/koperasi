@@ -86,4 +86,14 @@ class ReportController extends Controller
         
         }
     }
+
+    public function get_inactive_employee_fund_report()
+    {
+        $employees = Employee::where('activity_state', 0)->get();
+        $pdf = PDF::loadview('report/pdf/employee/ex', [
+            'date' => date('d-m-Y'),
+            'employees' => $employees,
+        ]);
+        return $pdf->stream('Laporan Karyawan Non Aktif.pdf');
+    }
 }

@@ -1,5 +1,11 @@
 @extends('layout.main')
 
+@section('button-header')
+<div class="ml-md-auto py-2 py-md-0">
+    <a href="/laporan/karyawan-nonaktif" target="_blank" class="btn btn-white ">Cetak Laporan Karyawan Non Aktif</a>
+</div>
+@endsection
+
 @section('content')
 <div class="row mt--2">
     @if (session()->has('success'))

@@ -59,7 +59,7 @@
                             Nonaktifkan
                         </button>
                         <button data-toggle="modal" data-target="#ambil-dana-jht-{{ $employee->id }}" class="btn btn-border btn-white btn-xs">
-                            Ambil Dana JHT
+                            Cairkan Dana JHT
                         </button>
                     </div>
                 </div>
@@ -81,7 +81,7 @@
                         </div>
                         <div class="modal-body">
                             <input id="activity_state" name="activity_state" type="hidden" value="0" required>
-                            <p>Yakin ingin <b>Menonaktifkan</b> karyawa?n</p>
+                            <p>Yakin ingin <b>Menonaktifkan</b> karyawan?</p>
                         </div>
                         <div class="modal-footer border-0">
                             <button type="submit" class="btn btn-danger">Simpan</button>

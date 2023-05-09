@@ -18,9 +18,7 @@ class AccountLineResource extends JsonResource
         return [
             'id' => $this->id,
             'amount' => $this->amount,
-            'month' => $this->month,
-            'year' => $this->year,
-            'stated' => $this->stated,
+            'state' => $this->state,
             'account_id' => $this->account_id,
             'employee_id' => $this->employee_id,
             'name' => $this->name,

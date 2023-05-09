@@ -56,6 +56,11 @@ class AccountController extends Controller
             $month = explode('-', $period)[0];
             $year = explode('-', $period)[1];
             
+            $checkData = Account::where('month', $month)->where('year', $year)->whereIn('state', ['draft', 'post'])->count();
+            if($checkData) {
+                return redirect($url)->with('error', 'Dana JHT untuk Periode terpilih telah dibuat!');
+            }
+
             $validatedData = [
                 'name' => $request->name,
                 'state' => 'draft',
