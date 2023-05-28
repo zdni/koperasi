@@ -140,6 +140,12 @@
                                                             </div>
                                                             <div class="col-sm-12">
                                                                 <div class="form-group form-group-default">
+                                                                    <label>Password</label>
+                                                                    <input id="password" name="password" type="text" class="form-control" placeholder="Masukkan Data Password">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-12">
+                                                                <div class="form-group form-group-default">
                                                                     <label>Role</label>
                                                                     <select name="role_id" id="role_id" class="form-control">
                                                                         @foreach($roles as $role)

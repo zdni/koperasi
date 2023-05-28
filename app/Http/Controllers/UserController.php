@@ -65,6 +65,9 @@ class UserController extends Controller
         ]);
         try {
             $user = User::where('id', $id)->first();
+            if($request->password) {
+                $validatedData['password'] = \bcrypt($request->password);
+            }
             User::where('id', $user->id)->update($validatedData);
             $status = 'success';
             $message = 'Berhasil Mengubah Data';
