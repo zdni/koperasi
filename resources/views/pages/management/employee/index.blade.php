@@ -127,4 +127,9 @@
         </div>
     @endforeach
 </div>
+@if ($is_paginate)
+    <div class="d-flex">
+        {{ $employees->links() }}
+    </div>
+@endif
 @endsection

@@ -44,20 +44,28 @@ class EmployeeController extends Controller
 
     public function index()
     {
+        $is_paginate = true;
         if( count(request()->query) ) {
             $query = Employee::where('activity_state', 1);
             if( request()->unit_id ) $query->where('unit_id', request()->unit_id);
             if( request()->position_id ) $query->where('position_id', request()->position_id);
             
-            $employees = $query->get();
+            if( request()->unit_id || request()->position_id ) {
+                $employees = $query->get();
+                $is_paginate = false;
+            } else {
+                $employees = $query->paginate(9);
+            }
         } else {
-            $employees = Employee::where('activity_state', 1)->get();
+            $query = Employee::where('activity_state', 1);
+            $employees = $query->paginate(9);
         }
 
         return view('pages.management.employee.index', [
             'page' => 'Data Koperasi',
             'description' => 'Daftar Karyawan KSU Abdi Karya',
             'employees' => $employees,
+            'is_paginate' => $is_paginate,
             'state' => ['Nonaktif', 'Aktif'],
         ]);
     }
